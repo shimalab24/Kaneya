@@ -123,15 +123,11 @@
     }
     .nowrap { white-space: nowrap; }
     .js-reveal {
-      opacity: 0.01;
-      transform: translateY(20px);
-      transition:
-        opacity 600ms cubic-bezier(.22, 1, .36, 1),
-        transform 600ms cubic-bezier(.22, 1, .36, 1);
+      transform: translateY(16px);
+      transition: transform 500ms cubic-bezier(.22, 1, .36, 1);
     }
     .js-reveal.is-visible {
-      opacity: 1;
-      transform: none;
+      transform: translateY(0);
     }
 
     .hero {
@@ -300,7 +296,7 @@
       align-items: center;
     }
     .stay-copy { padding-left: clamp(0px, 5vw, 60px); }
-    .stay-text { max-width: 470px; color: #5f5146; line-height: 2.25; }
+    .stay-text { max-width: 470px; color: #2e1f14; line-height: 2.25; }
     .stay-image {
       min-width: 0;
       aspect-ratio: 4 / 3;
@@ -608,7 +604,6 @@
         transition-duration: 0.01ms !important;
       }
       .js-reveal, .js-reveal.is-visible {
-        opacity: 1;
         transform: none;
         transition: none;
       }
