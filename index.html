@@ -1,0 +1,823 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="備瀬フクギ並木の中に佇む、築84年の一棟貸し古民家。海まで徒歩1分。">
+  <title>古民家かねや｜備瀬フクギ並木の一棟貸し古民家</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&amp;family=Noto+Sans+JP:wght@400;500&amp;family=Zen+Old+Mincho:wght@400;700&amp;display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --plaster: #f8f4ed;
+      --wood: #2e1f14;
+      --fukugi: #2c4a2e;
+      --terracotta: #b8462e;
+      --muted: #8a7b6b;
+      --pale-green: #eef2eb;
+      --white: #fffdf8;
+      --line: rgba(46, 31, 20, 0.18);
+      --display: "Zen Old Mincho", serif;
+      --serif-en: "Libre Baskerville", "Noto Sans JP", serif;
+      --sans: "Noto Sans JP", sans-serif;
+      --content: 1160px;
+      --gutter: clamp(22px, 5vw, 72px);
+      --section: clamp(88px, 12vw, 168px);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; background: var(--plaster); }
+    body {
+      margin: 0;
+      color: var(--wood);
+      background:
+        radial-gradient(circle at 8% 24%, rgba(138, 123, 107, 0.09), transparent 24rem),
+        var(--plaster);
+      font-family: var(--sans);
+      font-size: 16px;
+      line-height: 2;
+      word-break: normal;
+      line-break: strict;
+      overflow-wrap: normal;
+      text-wrap: pretty;
+      font-feature-settings: "palt" 1;
+      letter-spacing: 0.02em;
+      overflow-x: hidden;
+    }
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: 20;
+      pointer-events: none;
+      opacity: 0.05;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.75'/%3E%3C/svg%3E");
+    }
+    img { display: block; width: 100%; height: 100%; object-fit: cover; }
+    a { color: inherit; }
+    h1, h2, h3, p { margin-top: 0; }
+    h1, h2, h3 {
+      font-family: var(--display);
+      font-feature-settings: "palt" 1;
+      font-weight: 700;
+      line-height: 1.48;
+      letter-spacing: 0.035em;
+      overflow-wrap: normal;
+    }
+    p { margin-bottom: 0; }
+    .demo-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 30;
+      height: 40px;
+      display: grid;
+      place-items: center;
+      color: var(--white);
+      background: var(--wood);
+      font-family: var(--serif-en);
+      font-size: 10px;
+      line-height: 1;
+      letter-spacing: 0.18em;
+    }
+    .container {
+      width: min(calc(100% - (var(--gutter) * 2)), var(--content));
+      margin-inline: auto;
+    }
+    .kicker {
+      margin-bottom: 24px;
+      color: var(--fukugi);
+      font-family: var(--serif-en);
+      font-size: 12px;
+      font-style: italic;
+      letter-spacing: 0.22em;
+      line-height: 1.4;
+      text-transform: uppercase;
+      font-feature-settings: "palt" 1;
+    }
+    .section-title {
+      margin-bottom: 34px;
+      font-size: clamp(31px, 4vw, 56px);
+    }
+    .button {
+      min-height: 52px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 14px 44px;
+      border: none;
+      border-radius: 0;
+      color: var(--white);
+      background: var(--terracotta);
+      font-family: var(--serif-en);
+      font-size: 11px;
+      font-weight: 400;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      line-height: 1.5;
+      text-decoration: none;
+      transition: background 200ms ease-out;
+    }
+    .nowrap { white-space: nowrap; }
+    .js-reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      transition:
+        opacity 600ms cubic-bezier(.22, 1, .36, 1),
+        transform 600ms cubic-bezier(.22, 1, .36, 1);
+    }
+    .js-reveal.is-visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    .hero {
+      position: relative;
+      min-height: 100svh;
+      padding-top: 40px;
+      display: grid;
+      align-items: end;
+      isolation: isolate;
+      color: var(--white);
+    }
+    .hero-media, .hero-media::after { position: absolute; inset: 0; }
+    .hero-media { z-index: -2; }
+    .hero-media img { object-position: 50% 50%; }
+    .hero-media img {
+      animation: hero-settle 8000ms cubic-bezier(.25, .46, .45, .94) both;
+      will-change: transform;
+    }
+    .hero-media::after {
+      content: "";
+      background:
+        linear-gradient(180deg, rgba(20, 22, 14, 0.12) 16%, rgba(22, 20, 13, 0.28) 51%, rgba(20, 15, 10, 0.82) 100%),
+        linear-gradient(90deg, rgba(20, 15, 10, 0.35), transparent 64%);
+    }
+    .hero-copy {
+      width: min(1040px, calc(100% - (var(--gutter) * 2)));
+      margin-inline: auto;
+      padding: clamp(90px, 13vh, 150px) 0 clamp(58px, 9vh, 100px);
+    }
+    .hero-eyebrow {
+      margin-bottom: 24px;
+      font-family: var(--serif-en);
+      font-size: 12px;
+      font-style: italic;
+      letter-spacing: 0.22em;
+    }
+    .hero h1 {
+      max-width: 920px;
+      margin-bottom: 20px;
+      font-size: clamp(42px, 7vw, 92px);
+      line-height: 1.3;
+      letter-spacing: 0.06em;
+      text-shadow: 0 2px 30px rgba(0, 0, 0, 0.22);
+    }
+    .hero-subtitle {
+      margin-bottom: 36px;
+      color: rgba(255, 253, 248, 0.9);
+      font-family: var(--serif-en);
+      font-size: clamp(17px, 2vw, 25px);
+      font-style: italic;
+      letter-spacing: 0.035em;
+    }
+    .hero-note {
+      position: absolute;
+      right: 28px;
+      bottom: 32px;
+      font-family: var(--serif-en);
+      font-size: 10px;
+      letter-spacing: 0.16em;
+      writing-mode: vertical-rl;
+    }
+
+    .concept {
+      padding: var(--section) 0;
+      background:
+        linear-gradient(90deg, transparent 0 50%, rgba(138, 123, 107, 0.05) 50% 100%);
+    }
+    .concept-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 0.94fr) minmax(0, 0.76fr);
+      gap: clamp(60px, 9vw, 132px);
+      align-items: center;
+    }
+    .concept-copy { padding-left: clamp(0px, 3vw, 40px); }
+    .concept-text {
+      max-width: 560px;
+      font-family: var(--display);
+      font-size: clamp(16px, 1.5vw, 19px);
+      line-height: 2.35;
+      letter-spacing: 0.035em;
+    }
+    .concept-image {
+      position: relative;
+      min-width: 0;
+      aspect-ratio: 3 / 4;
+      background: var(--pale-green);
+      box-shadow: 28px 28px 0 rgba(44, 74, 46, 0.11);
+      overflow: hidden;
+    }
+    .concept-image img { object-position: 50% 50%; transform: scale(1.03); }
+    .concept-image::before {
+      content: "BISE, MOTOBU";
+      position: absolute;
+      z-index: 1;
+      left: -42px;
+      top: 74px;
+      color: var(--muted);
+      font-family: var(--serif-en);
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      transform: rotate(-90deg);
+      transform-origin: center;
+    }
+
+    .features {
+      padding: 0 0 var(--section);
+      background: var(--pale-green);
+    }
+    .features-image {
+      width: min(100%, 1440px);
+      height: clamp(240px, 34vw, 500px);
+      margin-inline: auto;
+      overflow: hidden;
+    }
+    .features-image img { object-position: center 48%; }
+    .feature-list {
+      width: min(calc(100% - (var(--gutter) * 2)), var(--content));
+      margin: clamp(54px, 7vw, 96px) auto 0;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      border-top: 1px solid rgba(44, 74, 46, 0.25);
+      border-bottom: 1px solid rgba(44, 74, 46, 0.25);
+    }
+    .feature-item {
+      min-width: 0;
+      padding: 40px clamp(22px, 3vw, 44px) 44px;
+    }
+    .feature-item.js-reveal:nth-child(2) { transition-delay: 80ms; }
+    .feature-item.js-reveal:nth-child(3) { transition-delay: 160ms; }
+    .feature-item + .feature-item { border-left: 1px solid rgba(44, 74, 46, 0.25); }
+    .feature-number {
+      margin-bottom: 25px;
+      color: var(--terracotta);
+      font-family: var(--serif-en);
+      font-size: 11px;
+      font-style: italic;
+      letter-spacing: 0.16em;
+    }
+    .feature-item h3 { margin-bottom: 15px; font-size: clamp(23px, 2.5vw, 31px); }
+    .feature-item p { color: #5d6658; font-size: 14px; line-height: 1.9; }
+
+    .interior { background: var(--wood); color: var(--white); }
+    .interior-image { height: min(72vw, 820px); min-height: 520px; overflow: hidden; }
+    .interior-image img { object-position: center 58%; }
+    .interior-caption {
+      display: flex;
+      align-items: center;
+      gap: 30px;
+      padding: 38px var(--gutter) 44px;
+      font-family: var(--display);
+      font-size: clamp(20px, 2.8vw, 34px);
+      letter-spacing: 0.05em;
+    }
+    .interior-caption::before {
+      content: "";
+      width: clamp(54px, 8vw, 112px);
+      height: 1px;
+      background: var(--terracotta);
+    }
+
+    .stay { padding: var(--section) 0; }
+    .stay-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 0.78fr) minmax(0, 1.1fr);
+      gap: clamp(50px, 8vw, 120px);
+      align-items: center;
+    }
+    .stay-copy { padding-left: clamp(0px, 5vw, 60px); }
+    .stay-text { max-width: 470px; color: #5f5146; line-height: 2.25; }
+    .stay-image {
+      min-width: 0;
+      aspect-ratio: 4 / 3;
+      position: relative;
+    }
+    .stay-image::after {
+      content: "";
+      position: absolute;
+      z-index: -1;
+      right: -28px;
+      bottom: -28px;
+      width: 58%;
+      height: 65%;
+      border: 1px solid rgba(184, 70, 46, 0.45);
+    }
+    .stay-image img { object-position: center 50%; }
+
+    .for-you { padding: var(--section) 0; border-top: 1px solid var(--line); }
+    .for-you-heading { display: grid; grid-template-columns: 0.62fr 1.38fr; gap: 40px; }
+    .scenario-list { margin-top: clamp(52px, 7vw, 90px); }
+    .scenario {
+      display: grid;
+      grid-template-columns: minmax(150px, 0.42fr) minmax(0, 1.58fr);
+      gap: clamp(28px, 6vw, 86px);
+      padding: clamp(34px, 5vw, 60px) clamp(22px, 4vw, 54px);
+      border-top: 1px solid var(--line);
+      border-left: 3px solid var(--fukugi);
+    }
+    .scenario:last-child { border-bottom: 1px solid var(--line); }
+    .scenario h3 { margin: 0; font-size: clamp(21px, 2.3vw, 28px); }
+    .scenario p { max-width: 690px; font-family: var(--display); font-size: clamp(16px, 1.5vw, 19px); line-height: 2.1; }
+
+    .story {
+      position: relative;
+      padding: clamp(110px, 16vw, 210px) var(--gutter);
+      color: var(--white);
+      background: var(--wood);
+      text-align: center;
+      overflow: hidden;
+    }
+    .story::before, .story::after {
+      content: "";
+      position: absolute;
+      border: 1px solid rgba(248, 244, 237, 0.13);
+      border-radius: 50%;
+    }
+    .story::before { width: 560px; height: 560px; top: -390px; left: -120px; }
+    .story::after { width: 420px; height: 420px; right: -260px; bottom: -260px; }
+    .story-inner { position: relative; z-index: 1; max-width: 880px; margin-inline: auto; }
+    .story .kicker { color: #db765e; }
+    .story .section-title { font-size: clamp(31px, 4.6vw, 62px); }
+    .story p { max-width: 680px; margin-inline: auto; color: rgba(255, 253, 248, 0.78); line-height: 2.35; }
+
+    .gallery { padding: var(--section) var(--gutter); background: #e8e1d6; }
+    .gallery-heading {
+      width: min(100%, var(--content));
+      margin: 0 auto clamp(46px, 6vw, 78px);
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 30px;
+    }
+    .gallery-heading .section-title { margin-bottom: 0; }
+    .gallery-note { color: var(--muted); font-family: var(--serif-en); font-size: 11px; letter-spacing: 0.18em; }
+    .gallery-grid {
+      width: min(100%, 1360px);
+      height: min(82vw, 980px);
+      min-height: 760px;
+      margin-inline: auto;
+      display: grid;
+      grid-template-columns: 1.16fr 0.8fr 0.8fr;
+      grid-template-rows: 1.05fr 0.78fr 0.78fr;
+      gap: clamp(8px, 1.2vw, 18px);
+    }
+    .gallery-item { min-width: 0; min-height: 0; overflow: hidden; }
+    .gallery-item:first-child { grid-row: 1 / 4; }
+    .gallery-item:nth-child(2) { grid-column: 2 / 4; }
+    .gallery-item img { transition: transform 500ms ease; }
+    .gallery-item:nth-child(1) img { object-position: 54% 50%; }
+    .gallery-item:nth-child(2) img { object-position: center 54%; }
+    .gallery-item:nth-child(4) img { object-position: center 58%; }
+
+    .reviews { padding: var(--section) 0; background: var(--pale-green); overflow: hidden; }
+    .reviews .container { margin-bottom: 50px; }
+    .review-track {
+      display: grid;
+      grid-auto-flow: column;
+      grid-auto-columns: min(520px, calc(100vw - 48px));
+      gap: 22px;
+      overflow-x: auto;
+      overscroll-behavior-inline: contain;
+      scroll-snap-type: inline mandatory;
+      padding: 0 max(var(--gutter), calc((100vw - var(--content)) / 2)) 30px;
+      scrollbar-width: thin;
+      scrollbar-color: var(--fukugi) transparent;
+    }
+    .review-card {
+      min-width: 0;
+      min-height: 300px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: clamp(32px, 5vw, 56px);
+      border: 1px solid rgba(44, 74, 46, 0.2);
+      background: rgba(248, 244, 237, 0.82);
+      scroll-snap-align: start;
+    }
+    .review-quote {
+      display: block;
+      visibility: visible;
+      opacity: 1;
+      color: var(--wood);
+      font-family: var(--display);
+      font-size: clamp(18px, 2vw, 24px);
+      line-height: 2;
+      letter-spacing: 0.025em;
+    }
+    .review-meta {
+      margin-top: 32px;
+      color: var(--muted);
+      font-family: var(--serif-en);
+      font-size: 10px;
+      font-style: italic;
+      letter-spacing: 0.16em;
+    }
+
+    .access { padding: var(--section) 0; }
+    .access-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 0.76fr) minmax(0, 1.24fr);
+      gap: clamp(50px, 8vw, 110px);
+      align-items: center;
+    }
+    .address { margin: 4px 0 28px; color: #5f5146; line-height: 1.9; }
+    .access-list { margin: 0; padding: 0; list-style: none; border-top: 1px solid var(--line); }
+    .access-list li { padding: 15px 0; border-bottom: 1px solid var(--line); font-size: 14px; }
+    .map {
+      min-width: 0;
+      aspect-ratio: 3 / 2;
+      background: #ddd6ca;
+      box-shadow: 24px 24px 0 rgba(44, 74, 46, 0.1);
+    }
+    .map iframe { display: block; width: 100%; height: 100%; border: 0; filter: saturate(0.7) sepia(0.08); }
+    .map-link {
+      display: inline-block;
+      margin-top: 24px;
+      color: var(--fukugi);
+      font-size: 14px;
+      font-weight: 500;
+      text-underline-offset: 0.35em;
+    }
+
+    .final-cta {
+      position: relative;
+      isolation: isolate;
+      padding: clamp(100px, 14vw, 170px) var(--gutter) clamp(115px, 15vw, 180px);
+      color: var(--white);
+    }
+    .final-cta-media,
+    .final-cta-media::after {
+      position: absolute;
+      inset: 0;
+    }
+    .final-cta-media { z-index: -2; }
+    .final-cta-media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 40%;
+    }
+    .final-cta-media::after {
+      content: "";
+      z-index: -1;
+      background:
+        linear-gradient(to right, rgba(20,10,5,0.88) 0%, rgba(20,10,5,0.55) 60%, rgba(20,10,5,0.3) 100%),
+        linear-gradient(180deg, rgba(20,10,5,0.05) 0%, rgba(20,10,5,0.38) 100%);
+    }
+    .final-cta-inner {
+      width: min(calc(100% - (var(--gutter) * 2)), var(--content));
+      margin-inline: auto;
+      max-width: 760px;
+      margin-right: auto;
+      /* 左寄せコンテンツ */
+    }
+    .final-cta .kicker { color: rgba(255, 253, 248, 0.68); }
+    .final-cta h2 { margin-bottom: 42px; font-size: clamp(31px, 4.8vw, 62px); }
+    .footer {
+      padding: 30px var(--gutter);
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      background: var(--plaster);
+      font-family: var(--serif-en);
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-align: center;
+    }
+    .mobile-cta { display: none; }
+    .mobile-cta {
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 300ms ease;
+    }
+    .mobile-cta.is-visible {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    @keyframes hero-settle {
+      from { transform: scale(1.04); }
+      to { transform: scale(1); }
+    }
+
+    @media (hover: hover) {
+      .button:hover { background: #9a3620; }
+      .gallery-item:hover img { transform: scale(1.025); }
+    }
+
+    @media (max-width: 820px) {
+      .concept-grid, .stay-grid, .access-grid { grid-template-columns: minmax(0, 1fr); }
+      .concept { background: var(--plaster); }
+      .concept-copy { padding-left: 0; }
+      .concept-image { width: 82%; margin-left: auto; aspect-ratio: 4 / 5; }
+      .feature-list { grid-template-columns: minmax(0, 1fr); }
+      .feature-item + .feature-item { border-left: 0; border-top: 1px solid rgba(44, 74, 46, 0.25); }
+      .interior-image { min-height: 430px; height: 76vw; }
+      .stay-copy { padding-left: 0; }
+      .stay-image { order: -1; }
+      .for-you-heading { grid-template-columns: minmax(0, 1fr); gap: 0; }
+      .scenario { grid-template-columns: minmax(0, 1fr); gap: 18px; }
+      .gallery-grid {
+        height: auto;
+        min-height: 0;
+        grid-template-columns: 1.2fr 0.8fr;
+        grid-template-rows: 380px 210px 210px 210px;
+      }
+      .gallery-item:first-child { grid-column: 1 / 3; grid-row: auto; }
+      .gallery-item:nth-child(2) { grid-column: auto; }
+      .access-grid { gap: 70px; }
+      .map { width: calc(100% - 20px); }
+    }
+
+    @media (max-width: 560px) {
+      :root { --gutter: 22px; --section: 90px; }
+      body { padding-bottom: 62px; font-size: 15px; }
+      .hero { min-height: 100svh; }
+      .hero-media img { object-position: 51% 50%; }
+      .hero-copy { width: calc(100% - 44px); padding-bottom: 54px; }
+      .hero h1 { font-size: clamp(26px, 7vw, 40px); line-height: 1.42; letter-spacing: 0.04em; }
+      .hero-subtitle { font-family: var(--display); font-style: normal; line-height: 1.8; }
+      .hero-note { display: none; }
+      .hero .button { width: 100%; margin-bottom: 64px; }
+      .section-title { font-size: clamp(29px, 8.5vw, 39px); line-height: 1.55; }
+      .concept-grid { gap: 56px; }
+      .concept-text { line-height: 2.15; }
+      .concept-image { width: calc(100% - 26px); box-shadow: 18px 18px 0 rgba(44, 74, 46, 0.11); }
+      .concept-image::before { display: none; }
+      .features-image { height: 250px; }
+      .feature-item { padding: 32px 12px 34px; }
+      .interior-image { height: 68vh; min-height: 430px; }
+      .interior-image img { object-position: 58% center; }
+      .interior-caption { align-items: flex-start; padding: 28px 22px 32px; line-height: 1.7; }
+      .interior-caption::before { margin-top: 17px; width: 38px; flex: 0 0 auto; }
+      .stay-grid { gap: 58px; }
+      .stay-image { aspect-ratio: 1 / 1; }
+      .stay-image img { object-position: 56% 50%; }
+      .stay-image::after { right: -12px; bottom: -12px; }
+      .scenario { padding-inline: 18px 10px; }
+      .story { padding-inline: 22px; }
+      .gallery { padding-inline: 12px; }
+      .gallery-heading { padding-inline: 10px; align-items: flex-start; flex-direction: column; }
+      .gallery-grid { grid-template-rows: 330px 170px 170px 170px; gap: 7px; }
+      .review-track { grid-auto-columns: calc(100vw - 44px); padding-left: 22px; padding-right: 22px; }
+      .review-card { min-height: 340px; }
+      .map { width: calc(100% - 12px); box-shadow: 12px 12px 0 rgba(44, 74, 46, 0.1); }
+      .final-cta { padding-inline: 22px; }
+      .final-cta h2 { line-height: 1.58; }
+      .mobile-cta {
+        position: fixed;
+        z-index: 25;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        min-height: 62px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 12px 20px;
+        color: var(--white);
+        background: var(--terracotta);
+        font-family: var(--serif-en);
+        font-size: 11px;
+        font-weight: 400;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        text-decoration: none;
+        box-shadow: 0 -8px 24px rgba(46, 31, 20, 0.16);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+      .js-reveal, .js-reveal.is-visible {
+        opacity: 1;
+        transform: none;
+        transition: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="demo-bar">DEMO SITE — 古民家かねや LP</div>
+
+  <main>
+    <section class="hero">
+      <!-- 写真差し込み: フクギに囲まれた古民家全景 -->
+      <div class="hero-media">
+        <img src="photos/rakuten-06.jpg" alt="フクギの緑に囲まれた古民家かねやの外観">
+      </div>
+      <div class="hero-copy">
+        <p class="hero-eyebrow">Traditional house in Bise, Okinawa</p>
+        <h1>フクギ並木の奥に、<wbr><span class="nowrap">沖縄がある。</span></h1>
+        <p class="hero-subtitle">築84年の古民家で、<wbr>海まで徒歩1分。</p>
+        <a class="button" href="https://hotel.travel.rakuten.co.jp/hotelinfo/plan/147430" target="_blank" rel="noopener noreferrer">予約サイトを確認する</a>
+      </div>
+      <p class="hero-note">KOMINKA KANAYA / BISE</p>
+    </section>
+
+    <section class="concept">
+      <div class="container concept-grid">
+        <div class="concept-copy">
+          <p class="kicker">About</p>
+          <h2 class="section-title js-reveal"><span class="nowrap">フクギが守り続けた</span>、<wbr>備瀬の古民家。</h2>
+          <p class="concept-text">ホテルでも、観光地でもない。<br>フクギ並木の集落に、ひっそりと佇む一棟。<br><br>縁側から緑の庭が見える。<br>夜は庭でBBQ。朝は近くの店から沖縄料理が届く。<br>「神秘的」「ここにしかない雰囲気」<br>何度も来る人が、そう言う。</p>
+        </div>
+        <!-- 写真差し込み: 木漏れ日の差す備瀬フクギ並木 -->
+        <figure class="concept-image">
+          <img src="photos/rakuten-09.jpg" alt="木漏れ日が差す備瀬のフクギ並木" loading="lazy">
+        </figure>
+      </div>
+    </section>
+
+    <section class="features">
+      <!-- 写真差し込み: 赤瓦の屋根を守るシーサー -->
+      <div class="features-image">
+        <img src="photos/rakuten-05.jpg" alt="青空とフクギを背景に赤瓦の上に立つシーサー" loading="lazy">
+      </div>
+      <div class="feature-list">
+        <article class="feature-item js-reveal">
+          <p class="feature-number">01 / TO THE SEA</p>
+          <h3>海まで徒歩1分</h3>
+          <p>備瀬崎のビーチへ、フクギ並木を抜けてすぐ</p>
+        </article>
+        <article class="feature-item js-reveal">
+          <p class="feature-number">02 / PRIVATE STAY</p>
+          <h3>築84年、一棟貸切</h3>
+          <p>フクギに守られた古民家を、家族だけで</p>
+        </article>
+        <article class="feature-item js-reveal">
+          <p class="feature-number">03 / A PLACE WITH STORY</p>
+          <h3>映画「糸」のロケ地</h3>
+          <p>物語を宿した、備瀬の古民家</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="interior">
+      <!-- 写真差し込み: 一枚板のテーブルと畳、庭へ続く縁側 -->
+      <div class="interior-image">
+        <img src="photos/jalan-05.jpg" alt="一枚板のテーブルを囲む古民家の畳間" loading="lazy">
+      </div>
+      <p class="interior-caption">縁側から緑の庭が見える。</p>
+    </section>
+
+    <section class="stay">
+      <div class="container stay-grid">
+        <div class="stay-copy">
+          <p class="kicker">Stay</p>
+          <h2 class="section-title js-reveal"><span class="nowrap">縁側に座れば</span>、<wbr>ここが自分の庭になる。</h2>
+          <p class="stay-text">子どもが芝生を走る横で、庭のBBQを囲む。朝食付きのプランなら、近くの店から沖縄料理が届く。宿の方と会うのはチェックインの時だけ。その後は家族で過ごす。</p>
+        </div>
+        <!-- 写真差し込み: 縁側と芝生の庭、BBQテーブル -->
+        <figure class="stay-image">
+          <img src="photos/jalan-02.jpg" alt="古民家の縁側と緑の庭に置かれたテーブル" loading="lazy">
+        </figure>
+      </div>
+    </section>
+
+    <section class="for-you">
+      <div class="container">
+        <div class="for-you-heading">
+          <p class="kicker">For You</p>
+          <h2 class="section-title js-reveal">こんな時間を、<span class="nowrap">想像してみてください。</span></h2>
+        </div>
+        <div class="scenario-list">
+          <article class="scenario">
+            <h3><span class="nowrap">子連れファミリー</span>へ</h3>
+            <p>子どもが庭を走り回っている間、縁側でオリオンビールを飲む。<br>気づいたら、日が暮れていた。</p>
+          </article>
+          <article class="scenario">
+            <h3><span class="nowrap">沖縄リピーター</span>へ</h3>
+            <p>フクギ並木を抜けてビーチに出た朝、もう1泊増やした。<br>それが、備瀬のかねやだ。</p>
+          </article>
+          <article class="scenario">
+            <h3><span class="nowrap">家族やグループ</span>へ</h3>
+            <p>広い古民家を一棟貸切。昼は備瀬崎へ、夜は庭でBBQ。<br>同じ場所に集まり、それぞれの時間を過ごす。</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="story">
+      <!-- 写真差し込み: 映画パンフレットは使用せず、古材色と漆喰線のCSS表現 -->
+      <div class="story-inner">
+        <p class="kicker">Story</p>
+        <h2 class="section-title js-reveal">映画「糸」の<span class="nowrap">ロケ地になった</span>、<wbr>備瀬の古民家。</h2>
+        <p>映画「糸」（2020年）のロケ地として選ばれた、備瀬の古民家。<br>築84年。沖縄伝統の赤瓦と白い漆喰、縁側。<br>「なつかしいたたずまい」のまま、今も1日1組だけを迎えている。</p>
+      </div>
+    </section>
+
+    <section class="gallery">
+      <div class="gallery-heading">
+        <div>
+          <p class="kicker">Scenes</p>
+          <h2 class="section-title js-reveal"><span class="nowrap">かねやで過ごす時間。</span></h2>
+        </div>
+        <p class="gallery-note">DAY &amp; NIGHT / INSIDE &amp; OUTSIDE</p>
+      </div>
+      <!-- 写真差し込み: 夜景・和室・別邸・集落・備瀬崎の非対称ギャラリー -->
+      <div class="gallery-grid">
+        <figure class="gallery-item js-reveal"><img src="photos/rakuten-07.jpg" alt="夜の灯りに包まれた古民家と庭" loading="lazy"></figure>
+        <figure class="gallery-item js-reveal"><img src="photos/rakuten-02.jpg" alt="木枠の窓から赤瓦が見える畳の和室" loading="lazy"></figure>
+        <figure class="gallery-item js-reveal"><img src="photos/rakuten-01.jpg" alt="木の縁側がある別邸の外観" loading="lazy"></figure>
+        <figure class="gallery-item js-reveal"><img src="photos/jalan-01.jpg" alt="石積みとフクギに囲まれた備瀬集落の古民家" loading="lazy"></figure>
+        <figure class="gallery-item js-reveal"><img src="photos/jalan-04.jpg" alt="白い砂と透明な海が広がる備瀬崎" loading="lazy"></figure>
+        <figure class="gallery-item js-reveal"><img src="photos/rakuten-05.jpg" alt="フクギの緑と赤瓦の上に立つシーサー" loading="lazy"></figure>
+      </div>
+    </section>
+
+    <section class="reviews">
+      <div class="container">
+        <p class="kicker">Reviews</p>
+        <h2 class="section-title js-reveal"><span class="nowrap">リピーターが語る</span>、<wbr>ここにしかない理由。</h2>
+      </div>
+      <div class="review-track">
+        <article class="review-card">
+          <p class="review-quote">「ここは、ここにしかない雰囲気があります。神秘的です。」</p>
+          <p class="review-meta">REPEATER'S VOICE</p>
+        </article>
+        <article class="review-card">
+          <p class="review-quote">「縁側に座りながら飲むオリオンビールは最高の一言に尽きます。」</p>
+          <p class="review-meta">GUEST'S VOICE</p>
+        </article>
+        <article class="review-card">
+          <p class="review-quote">「美しく、よく保存された築84年の家。機会があれば、また泊まりたいです。」</p>
+          <p class="review-meta">GUEST'S VOICE</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="access">
+      <div class="container access-grid">
+        <div>
+          <p class="kicker">Access</p>
+          <h2 class="section-title js-reveal">本部町備瀬、<wbr><span class="nowrap">フクギ並木の中。</span></h2>
+          <p class="address">〒905-0207<br>沖縄県国頭郡本部町備瀬584</p>
+          <ul class="access-list">
+            <li>那覇空港から車で約2時間</li>
+            <li>備瀬崎まで徒歩1分</li>
+            <li>美ら海水族館まで車で5分</li>
+          </ul>
+        </div>
+        <!-- 写真差し込み: 備瀬フクギ並木周辺の地図 -->
+        <div>
+          <div class="map">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4840.43546318911!2d127.87859147639675!3d26.70624576893115!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x34e4fa3d123fd499%3A0x812a5bada3d5f894!2z5Y-k5rCR5a62IOOBi-OBreOChA!5e1!3m2!1sja!2sjp!4v1781125664465!5m2!1sja!2sjp" title="古民家かねや 地図" loading="lazy" allowfullscreen referrerpolicy="no-referrer-when-downgrade"></iframe>
+          </div>
+          <a class="map-link" href="https://www.google.com/maps/place/古民家かねや/@26.70624,127.87859,17z/" target="_blank" rel="noopener noreferrer">Googleマップで開く</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="final-cta">
+      <!-- 写真差し込み: フクギ並木を背景にした予約導線 -->
+      <div class="final-cta-media">
+        <img src="photos/rakuten-09.jpg" alt="フクギ並木の中の古民家かねや" loading="lazy">
+      </div>
+      <div class="final-cta-inner">
+        <p class="kicker">Reserve</p>
+        <h2 class="js-reveal">1日1組。<wbr><span class="nowrap">フクギ並木の古民家で、</span><wbr><span class="nowrap">沖縄の時間を。</span></h2>
+        <a class="button" href="https://hotel.travel.rakuten.co.jp/hotelinfo/plan/147430" target="_blank" rel="noopener noreferrer">予約サイトを確認する</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">KOMINKA KANAYA / BISE, MOTOBU, OKINAWA</footer>
+  <a class="mobile-cta" href="https://hotel.travel.rakuten.co.jp/hotelinfo/plan/147430" target="_blank" rel="noopener noreferrer">予約サイトを確認する</a>
+  <script>
+    const revealEls = document.querySelectorAll(".js-reveal");
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add("is-visible");
+        revealObserver.unobserve(entry.target);
+      });
+    }, { threshold: 0.2 });
+    revealEls.forEach((el) => revealObserver.observe(el));
+
+    const hero = document.querySelector(".hero");
+    const mobileCta = document.querySelector(".mobile-cta");
+    const ctaObserver = new IntersectionObserver(([entry]) => {
+      mobileCta.classList.toggle("is-visible", !entry.isIntersecting);
+    }, { threshold: 0 });
+    ctaObserver.observe(hero);
+  </script>
+</body>
+</html>
